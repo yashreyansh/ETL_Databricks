@@ -30,6 +30,7 @@ def merge_to_silver(microbatch,batchId):
         ON A.c_custkey=B.c_custkey
         WHEN MATCHED AND (
                         A.updated_on IS DISTINCT FROM B.updated_on 
+                        AND B.updated_on > A.updated_on
                     )
         THEN
         UPDATE SET A.c_name=B.c_name,
