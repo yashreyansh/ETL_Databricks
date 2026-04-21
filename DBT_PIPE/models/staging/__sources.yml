@@ -1,0 +1,14 @@
+version: 2
+
+sources:
+  - name: databricks_schema_alias
+    schema: ETL_PIPE
+    description: Databricks schema alias for DBT_DATA
+    tables:
+      - name: orders_raw
+        description: Raw order data from Databricks
+      - name: customer_raw
+        description: raw customer data
+
+
+        
