@@ -1,0 +1,46 @@
+models:
+  - name: stag_orders
+    description: Created to simply get raw data with a few renamed columns
+    columns:
+      - name: orderkey
+        description: NA
+        data_tests:
+          - not_null
+          - unique
+      - name: custkey
+        description: customer key of the order
+        data_tests:
+          - not_null
+          - relationships:
+              to: ref('stag_customer')
+              field: custkey  
+      - name: created_on
+        data_tests:
+          - not_null
+      - name: updated_on
+        data_tests:
+          - not_null 
+      - name: created_by
+        data_tests:
+          - not_null
+      - name: updated_by
+        data_tests:
+          - not_null   
+
+
+  - name: stag_customer
+    description: NA
+    columns:
+      - name: custkey
+        data_tests:
+          - not_null
+          #- unique   # table is SCD2
+      - name: cust_name
+        data_tests:
+          - not_null
+      - name: created_on
+        data_tests:
+          - not_null
+      - name: created_by
+        data_tests:
+          - not_null
