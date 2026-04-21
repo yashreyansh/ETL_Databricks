@@ -28,7 +28,7 @@ models:
           - not_null   
 
 
-  - name: stag_customer
+  - name: stag_customers
     description: NA
     columns:
       - name: custkey

@@ -29,7 +29,8 @@ with customer_renamed as (
     {% if is_incremental() %}
 where
     updated_on>(
-            select max(updated_on) from {{ this }} 
+            select COALESCE(max(updated_on), '2000-01-01'::timestamp) 
+            from {{ this }} 
             )
     {% endif %}
 )
