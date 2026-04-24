@@ -1,0 +1,45 @@
+models:
+  - name: silver_customers
+    description: Just fetched from staging with masked phone
+    columns:
+      - name: custkey
+        description: NA
+        data_tests:
+          - not_null
+          - unique
+      - name: cust_name
+        description: customer name
+        data_tests:
+          - not_null
+      - name: created_on
+        data_tests:
+          - not_null
+      - name: updated_on
+        data_tests:
+          - not_null 
+      - name: created_by
+        data_tests:
+          - not_null
+      - name: updated_by
+        data_tests:
+          - not_null
+  
+  - name: silver_order
+    description: orders data
+    columns:
+      - name: orderkey
+        data_tests:
+          - not_null
+          - unique
+      - name: custkey
+        data_tests:
+          - not_null
+          - relationship: 
+            - to: ref('silver_customers')
+            - field: custkey
+      - name: ORDER_EXECUTION_STATUS
+        data_tests:
+          - not_null
+          - accepted_values:
+              values: ['CREATED','RETURNED','IN_PROGRESS']
+
