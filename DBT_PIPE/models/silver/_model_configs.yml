@@ -1,19 +1,16 @@
 models:
-  - name: stag_orders
-    description: Created to simply get raw data with a few renamed columns
+  - name: silver_customers
+    description: Just fetched from staging with masked phone
     columns:
-      - name: orderkey
+      - name: custkey
         description: NA
         data_tests:
           - not_null
           - unique
-      - name: custkey
-        description: customer key of the order
+      - name: cust_name
+        description: customer name
         data_tests:
           - not_null
-          - relationships:
-              to: ref('stag_customer')
-              field: custkey  
       - name: created_on
         data_tests:
           - not_null
@@ -25,22 +22,24 @@ models:
           - not_null
       - name: updated_by
         data_tests:
-          - not_null   
-
-
-  - name: stag_customers
-    description: NA
+          - not_null
+  
+  - name: silver_order
+    description: orders data
     columns:
+      - name: orderkey
+        data_tests:
+          - not_null
+          - unique
       - name: custkey
         data_tests:
           - not_null
-          #- unique   # table is SCD2
-      - name: cust_name
+          - relationships: 
+              to: ref('silver_customers')
+              field: custkey
+      - name: ORDER_EXECUTION_STATUS
         data_tests:
           - not_null
-      - name: created_on
-        data_tests:
-          - not_null
-      - name: created_by
-        data_tests:
-          - not_null
+          - accepted_values:
+              values: ['CREATED','RETURNED','IN_PROGRESS']
+
