@@ -34,9 +34,9 @@ models:
       - name: custkey
         data_tests:
           - not_null
-          - relationship: 
-            - to: ref('silver_customers')
-            - field: custkey
+          - relationships: 
+              to: ref('silver_customers')
+              field: custkey
       - name: ORDER_EXECUTION_STATUS
         data_tests:
           - not_null

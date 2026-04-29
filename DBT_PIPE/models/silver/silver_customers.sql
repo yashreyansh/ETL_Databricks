@@ -24,6 +24,6 @@ select * From
 
 {% if is_incremental() %}
     where updated_on >
-     ( SELECT MAX(updated_on) from {{ this } )
+     ( SELECT MAX(updated_on) from {{ this }} )
 {% endif %}
 
